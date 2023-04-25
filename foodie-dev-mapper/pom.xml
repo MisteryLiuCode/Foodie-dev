@@ -11,6 +11,9 @@
 
     <artifactId>foodie-dev-mapper</artifactId>
 
+    <name>foodie-dev-mapper</name>
+    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>com.imooc</groupId>
