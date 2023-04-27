@@ -1,5 +1,6 @@
 package com.liu.controller;
 
+import com.liu.common.RespResult;
 import com.liu.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,28 @@ public class PassportController {
     @Autowired(required = false)
     private UserService userService;
 
+    /**
+     * 校验用户是否存在
+     * @param username
+     * @return
+     */
     @GetMapping("/usernameIsExist")
-    public int usernameIsExist(@RequestParam String username){
+    public RespResult<Integer> usernameIsExist(@RequestParam String username){
 
         //判断用户名不能为空
         if (StringUtils.isBlank(username)){
-            return 500;
+            return new RespResult<>(500);
         }
         //查找用户名是否存在
         boolean isExist = userService.queryUsernameIsExist(username);
         if (isExist){
-            return 500;
+            return new RespResult<>(500);
         }
         //请求成功,用户名没有重复
-        return 200;
+        return new RespResult<>(200);
     }
+
+
+
+
 }
