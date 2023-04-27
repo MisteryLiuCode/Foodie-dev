@@ -17,10 +17,10 @@ server:
 spring:
   datasource:      # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型：HikariCP
-    driver-class-name: com.mysql.jdbc.Driver  # mysql驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver  # mysql驱动
     url: jdbc:mysql://101.43.145.108:3306/foodie_dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
-username: root
-password: 12345678
+    username: foodie_dev
+    password: l198923.
 hikari:
   connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时
 #  长还没可用的连接则发生SQLException， 默认:30秒

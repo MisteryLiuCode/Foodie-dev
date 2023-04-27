@@ -1,4 +1,4 @@
-package com.common;
+package com.liu.common;
 
 /**
  * Hello world!
