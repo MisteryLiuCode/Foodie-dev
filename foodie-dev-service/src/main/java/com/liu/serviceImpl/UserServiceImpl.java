@@ -1,7 +1,9 @@
 package com.liu.serviceImpl;
 
 
+import com.liu.common.enums.Sex;
 import com.liu.common.utils.DateUtils;
+import com.liu.common.utils.IdUtils;
 import com.liu.common.utils.MD5Utils;
 import com.liu.mapper.UsersMapper;
 import com.liu.pojo.Users;
@@ -47,22 +49,26 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(propagation =Propagation.REQUIRED)
     @Override
-    public Users creatUser(UserBO userReq) {
-        Users users = new Users();
-        users.setUsername(userReq.getUsername());
+    public int creatUser(UserBO userReq) {
+        Users user = new Users();
+        user.setId(IdUtils.snowflakeId());
+        user.setUsername(userReq.getUsername());
         try {
-            users.setPassword(MD5Utils.getMD5Str(userReq.getPassword()));
+            user.setPassword(MD5Utils.getMD5Str(userReq.getPassword()));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        users.setNickname(userReq.getUsername());
-        users.setFace(USER_FACE);
+        user.setNickname(userReq.getUsername());
+        user.setFace(USER_FACE);
         try {
-            users.setBirthday(DateUtils.parse("1900-01-01",DateUtils.DATE_FORMAT_DATE_ONLY));
+            user.setBirthday(DateUtils.parse("1900-01-01",DateUtils.DATE_FORMAT_DATE_ONLY));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-        return null;
+        //默认性别为保密
+        user.setSex(Sex.serect.type);
+        user.setCreatedTime(new Date());
+        user.setUpdatedTime(new Date());
+        return usersMapper.insert(user);
     }
 }

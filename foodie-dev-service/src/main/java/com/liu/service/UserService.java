@@ -22,6 +22,6 @@ public interface UserService {
      * @param userReq
      * @return
      */
-    Users creatUser(UserBO userReq);
+    int creatUser(UserBO userReq);
 
 }
