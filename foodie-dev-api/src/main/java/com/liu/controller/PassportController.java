@@ -3,6 +3,8 @@ package com.liu.controller;
 import com.liu.common.RespResult;
 import com.liu.pojo.bo.UserBO;
 import com.liu.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,11 @@ import org.springframework.web.bind.annotation.*;
  * @date 2023/4/27 14:03
  */
 @RestController
-@RequestMapping("/passport")
+@RequestMapping(value = "/passport",method = {RequestMethod.POST,RequestMethod.GET})
+@Api(value = "注册登录",tags={"用于注册登录相关接口"})
 public class PassportController {
 
-    @Autowired(required = false)
+    @Autowired
     private UserService userService;
 
     /**
@@ -24,6 +27,7 @@ public class PassportController {
      * @param username
      * @return
      */
+    @ApiOperation(value = "用户名是否存在",notes = "用户名是否存在")
     @GetMapping("/usernameIsExist")
     public RespResult<Integer> usernameIsExist(@RequestParam String username){
 
@@ -40,6 +44,7 @@ public class PassportController {
         return new RespResult<>(200);
     }
 
+    @ApiOperation(value = "用户注册",notes = "用户注册")
     @RequestMapping("/regist")
     public RespResult regist(@RequestBody UserBO userBO){
 
