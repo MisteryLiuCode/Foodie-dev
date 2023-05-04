@@ -1,6 +1,7 @@
 package com.liu.serviceImpl;
 
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.liu.common.enums.Sex;
 import com.liu.common.utils.DateUtils;
 import com.liu.common.utils.IdUtils;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import tk.mybatis.mapper.entity.Example;
 
 import java.security.NoSuchAlgorithmException;
@@ -71,4 +73,15 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedTime(new Date());
         return usersMapper.insert(user);
     }
+
+    @Override
+    public Users queryUserForLogin(String username, String password) {
+        Example example = new Example(Users.class);
+        Example.Criteria criteria=example.createCriteria();
+        criteria.andEqualTo("username",username).andEqualTo("password",password);
+        Users users = usersMapper.selectOneByExample(example);
+        return users;
+    }
+
+
 }

@@ -24,4 +24,6 @@ public interface UserService {
      */
     int creatUser(UserBO userReq);
 
+    Users queryUserForLogin(String username,String password);
+
 }

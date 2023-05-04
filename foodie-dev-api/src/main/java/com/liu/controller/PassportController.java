@@ -1,13 +1,19 @@
 package com.liu.controller;
 
 import com.liu.common.RespResult;
+import com.liu.common.utils.MD5Utils;
+import com.liu.pojo.Users;
 import com.liu.pojo.bo.UserBO;
 import com.liu.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Example;
+
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -74,5 +80,29 @@ public class PassportController {
         //4.实现注册
         userService.creatUser(userBO);
         return new RespResult("success");
+    }
+
+    /**
+     * 检索用户名和密码是否匹配,用于登录
+     */
+
+    @ApiOperation(value = "用户登录",notes = "用户登录")
+    @RequestMapping("/login")
+    public RespResult<Users> login(@RequestBody UserBO userBO) throws NoSuchAlgorithmException {
+        String username=userBO.getUsername();
+        String password=userBO.getPassword();
+        //校验
+        //0.判断用户名和密码必须不能为空
+        if (StringUtils.isBlank(username)
+                || StringUtils.isBlank(password)
+                ){
+            return new RespResult().setRetMsg("用户名或密码不能为空");
+        }
+        //4.实现注册
+        Users userResult = userService.queryUserForLogin(username, MD5Utils.getMD5Str(password));
+        if (userResult==null){
+            return new RespResult().setRetMsg("用户名或密码错误");
+        }
+        return new RespResult(userResult);
     }
 }
