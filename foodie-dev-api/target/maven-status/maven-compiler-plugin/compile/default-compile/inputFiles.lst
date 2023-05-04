@@ -1,3 +1,5 @@
 /Users/liushuaibiao/Desktop/Foodie-dev/foodie-dev-api/src/main/java/com/liu/Application.java
+/Users/liushuaibiao/Desktop/Foodie-dev/foodie-dev-api/src/main/java/com/liu/config/CorsConfig.java
 /Users/liushuaibiao/Desktop/Foodie-dev/foodie-dev-api/src/main/java/com/liu/controller/HelloController.java
 /Users/liushuaibiao/Desktop/Foodie-dev/foodie-dev-api/src/main/java/com/liu/controller/PassportController.java
+/Users/liushuaibiao/Desktop/Foodie-dev/foodie-dev-api/src/main/java/com/liu/config/Swagger2.java
