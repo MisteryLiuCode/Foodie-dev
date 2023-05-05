@@ -105,4 +105,12 @@ public class PassportController {
         }
         return new RespResult(userResult);
     }
+
+    @ApiOperation(value = "用户退出登录",notes = "用户退出登录",httpMethod = "POST")
+    @PostMapping("/logout")
+    public RespResult logout(@RequestParam String userId){
+        //清除用户相关信息的 cookie,这里我没使用 cookie,所以无需清除
+        return new RespResult("success");
+    }
+
 }
